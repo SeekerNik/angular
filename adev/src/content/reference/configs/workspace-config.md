@@ -229,6 +229,55 @@ The `sourceMap` and `optimization` options can be set to a simple boolean value.
 
 The following sections provide more details of how these complex values are used in each case.
 
+## Configuring builder targets
+
+A project has architect targets which perform build-related tasks, such as `build`, `serve`, `test`, `lint`, and `e2e`. Each target can have configurations defined in `angular.json`.
+
+### Extra build and test options
+
+The configurable options for a default or targeted build generally correspond to the options available for the [`ng build`](cli/build), [`ng serve`](cli/serve), and [`ng test`](cli/test) commands.
+
+---
+
+#### Serve options
+
+The following options are specific to the `ng serve` target.
+
+| Option         | Details                                                                                          | Value type        | Default value |
+|:---------------|:-------------------------------------------------------------------------------------------------|:------------------|:--------------|
+| `allowedHosts` | Configure which hosts are allowed when serving the app.<br><br>• From the CLI this is a boolean.<br>• In `angular.json` it can be an array of hostnames. | `boolean` \| `string[]` | `false` |
+
+##### Example
+
+From the CLI (boolean only):
+
+```bash
+ng serve --allowed-hosts
+```
+
+From angular.json (hostnames must be specified here, not via CLI):
+
+<docs-code language="json">
+  
+  {
+  "projects": {
+    "my-app": {
+      "architect": {
+        "serve": {
+          "options": {
+            "allowedHosts": [
+              "my.host1.com",
+              "my.host2.com"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+</docs-code>
+
 ### Assets configuration
 
 Each `build` target configuration can include an `assets` array that lists files or folders you want to copy as-is when building your project.
